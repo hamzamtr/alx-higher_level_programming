@@ -32,7 +32,7 @@ Prototypes for functions written in this project:
 ## Tasks :page_with_curl:
 
 * **0. Integers addition**
-  * [0-add_integer.py](./0-add_integer.py): Python function that returns the integer addition
+  * [0-add_integer.py](0-add_integer.py): Python function that returns the integer addition
   of two numbers.
   * If either of `a` or `b` is not an `int` or `float`, a `TypeError` is raised
   with the message `a must be an integer` or `b must be an integer`.
