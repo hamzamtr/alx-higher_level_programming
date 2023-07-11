@@ -1,19 +1,25 @@
 #!/usr/bin/python3
-"""
-Contains the class BaseGeometry and subclass Rectangle
-"""
-
-Rectangle = __import__('9-rectangle').Rectangle
+'''
+Module for class Student.
+'''
 
 
-class Square(Rectangle):
-    """A representation of a square"""
-    def __init__(self, size):
-        """instantiation of the square"""
-        self.integer_validator("size", size)
-        self.__size = size
-        super().__init__(size, size)
+class Student:
+    ''' Student Class '''
 
-    def area(self):
-        """"returns the area of the square"""
-        return self.__size ** 2
+    def __init__(self, first_name, last_name, age):
+        ''' Initialize Class '''
+        self.first_name = first_name
+        self.last_name = last_name
+        self.age = age
+
+    def to_json(self, attrs=None):
+        ''' Returns dictionary to JSON '''
+        if attrs is not None and all(isinstance(item, str) for item in attrs):
+            ret = {}
+            for p, r in self.__dict__.items():
+                if p in attrs:
+                    ret[p] = r
+            return ret
+        else:
+            return self.__dict__

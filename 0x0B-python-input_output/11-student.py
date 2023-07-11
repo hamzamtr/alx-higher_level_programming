@@ -1,30 +1,25 @@
 #!/usr/bin/python3
-"""
-module: 11-student
-resources: a class called Student
-"""
+""" amodule named Student that creats student"""
 
 
-class Student():
-    """
-    classname: Student
-    instance variables: first_name, last_name, age
-    instance methods: to_json(self, attr=None), __init__,
-    reload_from_json(self, json)
-    """
+class Student:
+    """Student obj, interesting how you don't have to directly
+    test for strings in a loop, python is weird"""
+
     def __init__(self, first_name, last_name, age):
         self.first_name = first_name
         self.last_name = last_name
         self.age = age
 
-    def to_json(self, attr=None):
-        required_attr = dict(self.__dict__)
-        if type(attr) is list:
-            for item in self.__dict__:
-                if item not in attr:
-                    del(required_attr[item])
-        return required_attr
+    def to_json(self, attrs=None):
+        if attrs is None:
+            return self.__dict__
+        new_dictionary = {}
+        for key, value in self.__dict__.items():
+            if key in attrs:
+                new_dictionary[key] = value
+        return new_dictionary
 
     def reload_from_json(self, json):
-        for key in json:
-            self.__dict__[key] = json[key]
+        for key, value in json.items():
+            setattr(self, key, value)

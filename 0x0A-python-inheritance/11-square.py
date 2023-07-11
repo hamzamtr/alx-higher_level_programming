@@ -1,53 +1,30 @@
 #!/usr/bin/python3
-"""
-Contains the class BaseGeometry and subclass Rectangle
-"""
+'''
+Module for Class Student.
+'''
 
 
-class BaseGeometry:
-    """A class with public instance methods area and integer_validator"""
-    def area(self):
-        """raises an exception when called"""
-        raise Exception("area() is not implemented")
+class Student:
+    ''' Student class '''
 
-    def integer_validator(self, name, value):
-        """validates that value is an integer greater than 0"""
-        if type(value) is not int:
-            raise TypeError("{:s} must be an integer".format(name))
-        if value <= 0:
-            raise ValueError("{:s} must be greater than 0".format(name))
+    def __init__(self, first_name, last_name, age):
+        ''' Initialize Class '''
+        self.first_name = first_name
+        self.last_name = last_name
+        self.age = age
 
+    def to_json(self, attrs=None):
+        ''' Return dictionary to JSON '''
+        if attrs is not None and all(isinstance(item, str) for item in attrs):
+            ret = {}
+            for p, r in self.__dict__.items():
+                if p in attrs:
+                    ret[p] = r
+            return ret
+        else:
+            return self.__dict__
 
-class Rectangle(BaseGeometry):
-    """A representation of a rectangle"""
-    def __init__(self, width, height):
-        """instantiation of the rectangle"""
-        self.integer_validator("width", width)
-        self.__width = width
-        self.integer_validator("height", height)
-        self.__height = height
-
-    def area(self):
-        """returns the area of the rectangle"""
-        return self.__width * self.__height
-
-    def __str__(self):
-        """informal string representation of the rectangle"""
-        return "[Rectangle] {:d}/{:d}".format(self.__width, self.__height)
-
-
-class Square(Rectangle):
-    """A representation of a square"""
-    def __init__(self, size):
-        """instantiation of the square"""
-        self.integer_validator("size", size)
-        self.__size = size
-        super().__init__(size, size)
-
-    def area(self):
-        """"returns the area of the square"""
-        return self.__size ** 2
-
-    def __str__(self):
-        """informal string reepresentation of the square"""
-        return "[Square] {:d}/{:d}".format(self.__size, self.__size)
+    def reload_from_json(self, json):
+        ''' Change attributes '''
+        for p, r in json.items():
+            self.__dict__[p] = r

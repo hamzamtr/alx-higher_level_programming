@@ -1,13 +1,11 @@
 #!/usr/bin/python3
-"""
-module: 8-class_to_json
-resources: class_to_json(obj) function
-"""
+"""module named class_to_json module"""
 
 
 def class_to_json(obj):
-    """
-    Takes a python object and extracts a JSON
-    from it
-    """
-    return obj.__dict__
+    """returns dict descriotion of obj"""
+
+    if hasattr(obj, "__dict__"):
+        return obj.__dict__.copy()
+    else:
+        return {}

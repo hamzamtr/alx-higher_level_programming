@@ -1,15 +1,9 @@
 #!/usr/bin/python3
-
-"""
-module: 3-to_json_string
-resources: to_json_string() function
-"""
+"""a module that converts a dictionary ti json file"""
 import json
 
 
 def to_json_string(my_obj):
-    """
-    This function serializes python objects to
-    JSON representation of an object(string)
-    """
+    """ amethod that returns the json representation of a string"""
+
     return json.dumps(my_obj)
